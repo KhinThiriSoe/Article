@@ -1,7 +1,8 @@
-package com.khinthirisoe.cararticle
+package com.khinthirisoe.cararticle.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.khinthirisoe.cararticle.R
 
 class MainActivity : AppCompatActivity() {
 
