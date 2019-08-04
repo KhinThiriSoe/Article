@@ -3,9 +3,7 @@ package com.khinthirisoe.cararticle.network
 import com.khinthirisoe.cararticle.database.DatabaseArticle
 import com.khinthirisoe.cararticle.domain.ArticleContent
 
-data class NetworkContentContainer(val content: List<Content>)
-
-fun NetworkContentContainer.asDomainModel(): List<ArticleContent> {
+fun Article.asDomainModel(): List<ArticleContent> {
     return content.map {
         ArticleContent(
             title = it.title,
@@ -16,13 +14,13 @@ fun NetworkContentContainer.asDomainModel(): List<ArticleContent> {
     }
 }
 
-fun NetworkContentContainer.asDatabaseModel(): Array<DatabaseArticle> {
+fun Article.asDatabaseModel(): Array<DatabaseArticle> {
     return content.map {
         DatabaseArticle(
+            image = it.image,
             title = it.title,
             datetime = it.dateTime,
-            ingress = it.ingress,
-            image = it.image
+            ingress = it.ingress
         )
     }.toTypedArray()
 }
