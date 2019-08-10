@@ -1,4 +1,4 @@
-package com.khinthirisoe.cararticle.ui
+package com.khinthirisoe.cararticle.ui.overview
 
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView

@@ -1,4 +1,4 @@
-package com.khinthirisoe.cararticle.ui
+package com.khinthirisoe.cararticle.ui.overview
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -52,9 +52,10 @@ class OverviewFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        viewModelAdapter = ArticleAdapter(ArticleClick {
+        viewModelAdapter =
+            ArticleAdapter(ArticleClick {
 
-        })
+            })
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager = LinearLayoutManager(context)

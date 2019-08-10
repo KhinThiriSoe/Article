@@ -11,7 +11,7 @@
 
         <variable
             name="articleCallback"
-            type="com.khinthirisoe.cararticle.ui.ArticleClick" />
+            type="com.khinthirisoe.cararticle.ui.overview.ArticleClick" />
     </data>
 
     <LinearLayout

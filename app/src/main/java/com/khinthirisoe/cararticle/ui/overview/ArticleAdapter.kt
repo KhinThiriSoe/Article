@@ -1,4 +1,4 @@
-package com.khinthirisoe.cararticle.ui
+package com.khinthirisoe.cararticle.ui.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
