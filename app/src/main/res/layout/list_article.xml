@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="article"
             type="com.khinthirisoe.cararticle.domain.ArticleContent" />
@@ -29,6 +30,7 @@
                 android:adjustViewBounds="true"
                 android:foreground="@drawable/gradient_background"
                 android:scaleType="centerCrop"
+                app:imageUrl="@{article.image}"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
@@ -39,9 +41,9 @@
                 android:layout_marginBottom="@dimen/standard_margin"
                 android:paddingLeft="@dimen/standard_margin"
                 android:paddingRight="@dimen/standard_margin"
+                android:text="@{article.title}"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/title_size"
-                android:text="@{article.title}"
                 android:textStyle="bold"
                 tools:text="Q7 - Greatness starts, when you don't stop." />
 
@@ -68,6 +70,7 @@
                 android:id="@+id/txt_ingress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@{article.ingress}"
                 android:textColor="@android:color/white"
                 tools:text="The Audi Q7 is the result of an ambitious idea: never cease to improve." />
 
