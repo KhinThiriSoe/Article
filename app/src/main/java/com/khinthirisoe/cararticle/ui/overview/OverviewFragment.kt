@@ -31,7 +31,6 @@ class OverviewFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.articles.observe(viewLifecycleOwner, Observer<List<ArticleContent>> { article ->
             article?.apply {
-                viewModelAdapter?.articles = article
             }
         })
     }
@@ -51,11 +50,6 @@ class OverviewFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
-
-        viewModelAdapter =
-            ArticleAdapter(ArticleClick {
-
-            })
 
         binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
             layoutManager = LinearLayoutManager(context)

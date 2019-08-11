@@ -2,35 +2,49 @@ package com.khinthirisoe.cararticle.ui.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil.inflate
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.khinthirisoe.cararticle.databinding.ListArticleBinding
 import com.khinthirisoe.cararticle.domain.ArticleContent
 
-class ArticleAdapter(val callback: ArticleClick) : RecyclerView.Adapter<ArticleViewHolder>() {
+class ArticleAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<ArticleContent, ArticleAdapter.ArticleViewHolder>(DiffCallback) {
 
-    var articles: List<ArticleContent> = emptyList()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
+    class ArticleViewHolder(private var binding: ListArticleBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(articleContent: ArticleContent) {
+            binding.article = articleContent
+            binding.executePendingBindings()
         }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
-        val withDataBinding: ListArticleBinding = inflate(
-            LayoutInflater.from(parent.context),
-            ArticleViewHolder.LAYOUT,
-            parent,
-            false)
-        return ArticleViewHolder(withDataBinding)
     }
 
-    override fun getItemCount() = articles.size
+    companion object DiffCallback : DiffUtil.ItemCallback<ArticleContent>() {
+        override fun areItemsTheSame(oldItem: ArticleContent, newItem: ArticleContent): Boolean {
+            return oldItem === newItem
+        }
+
+        override fun areContentsTheSame(oldItem: ArticleContent, newItem: ArticleContent): Boolean {
+            return oldItem.image == newItem.image
+        }
+    }
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): ArticleViewHolder {
+        return ArticleViewHolder(ListArticleBinding.inflate(LayoutInflater.from(parent.context)))
+    }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
-        holder.viewDataBinding.also {
-            it.article = articles[position]
+        val articleContent = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(articleContent)
         }
+        holder.bind(articleContent)
     }
 
+    class OnClickListener(val clickListener: (articleContent: ArticleContent) -> Unit) {
+        fun onClick(articleContent: ArticleContent) = clickListener(articleContent)
+    }
 }
-
