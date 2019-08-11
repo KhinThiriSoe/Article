@@ -13,19 +13,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.khinthirisoe.cararticle.R
 import com.khinthirisoe.cararticle.databinding.FragmentOverviewBinding
 import com.khinthirisoe.cararticle.domain.ArticleContent
-import com.khinthirisoe.cararticle.viewmodels.ArticleViewModel
 
 class OverviewFragment : Fragment() {
 
-    private val viewModel: ArticleViewModel by lazy {
+    private val viewModel: OverviewViewModel by lazy {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        ViewModelProviders.of(this, ArticleViewModel.Factory(activity.application))
-            .get(ArticleViewModel::class.java)
+        ViewModelProviders.of(this, OverviewViewModel.Factory(activity.application))
+            .get(OverviewViewModel::class.java)
     }
 
-    private var viewModelAdapter: ArticleAdapter? = null
+    private var viewModelAdapter: OverviewAdapter? = null
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)

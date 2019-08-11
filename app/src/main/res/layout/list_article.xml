@@ -8,10 +8,6 @@
         <variable
             name="article"
             type="com.khinthirisoe.cararticle.domain.ArticleContent" />
-
-        <variable
-            name="articleCallback"
-            type="com.khinthirisoe.cararticle.ui.overview.ArticleClick" />
     </data>
 
     <LinearLayout
