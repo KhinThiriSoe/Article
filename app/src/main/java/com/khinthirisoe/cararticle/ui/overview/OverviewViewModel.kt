@@ -18,7 +18,6 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
     val navigateToSelectedArticle: LiveData<ArticleContent>
         get() = _navigateToSelectedArticle
 
-
     private val viewModelJob = SupervisorJob()
     private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
@@ -31,7 +30,7 @@ class OverviewViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    val articles = articleRepository.articles
+    val articleContent = articleRepository.articles
 
     fun displayContentDetails(articleContent: ArticleContent) {
         _navigateToSelectedArticle.value = articleContent

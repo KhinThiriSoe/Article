@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.khinthirisoe.cararticle.R
@@ -20,16 +21,17 @@ class OverviewFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        ViewModelProviders.of(this, OverviewViewModel.Factory(activity.application))
+        ViewModelProviders.of(this, OverviewViewModelFactory(activity.application))
             .get(OverviewViewModel::class.java)
     }
 
-    private var viewModelAdapter: OverviewAdapter? = null
+    private var viewModelAdapter: OverviewAdapter? = OverviewAdapter(this)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.articles.observe(viewLifecycleOwner, Observer<List<ArticleContent>> { article ->
-            article?.apply {
+        viewModel.articleContent.observe(viewLifecycleOwner, Observer<List<ArticleContent>> { content ->
+            content?.apply {
+                viewModelAdapter?.articleContentLists = content
             }
         })
     }
@@ -43,17 +45,23 @@ class OverviewFragment : Fragment() {
             inflater,
             R.layout.fragment_overview,
             container,
-            false
-        )
+            false)
 
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
 
-        binding.root.findViewById<RecyclerView>(R.id.recycler_view).apply {
+        binding.root.findViewById<RecyclerView>(R.id.content_list).apply {
             layoutManager = LinearLayoutManager(context)
             adapter = viewModelAdapter
         }
+
+        viewModel.navigateToSelectedArticle.observe(this, Observer {
+            if ( null != it ) {
+                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailsFragment())
+                viewModel.displayContentDetailsComplete()
+            }
+        })
 
         return binding.root
     }

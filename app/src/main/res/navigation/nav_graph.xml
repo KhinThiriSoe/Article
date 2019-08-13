@@ -9,5 +9,14 @@
         android:id="@+id/overviewFragment"
         android:name="com.khinthirisoe.cararticle.ui.overview.OverviewFragment"
         tools:layout="@layout/fragment_overview"
-        android:label="OverviewFragment" />
+        android:label="OverviewFragment" >
+        <action
+            android:id="@+id/action_overviewFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.khinthirisoe.cararticle.ui.details.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" />
 </navigation>

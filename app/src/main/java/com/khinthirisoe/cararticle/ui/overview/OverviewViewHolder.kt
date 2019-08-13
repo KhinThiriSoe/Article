@@ -1,13 +1,15 @@
 package com.khinthirisoe.cararticle.ui.overview
 
+import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.RecyclerView
+import com.khinthirisoe.cararticle.R
 import com.khinthirisoe.cararticle.databinding.ListArticleBinding
-import com.khinthirisoe.cararticle.domain.ArticleContent
 
-class OverviewViewHolder(private var binding: ListArticleBinding) :
+class OverviewViewHolder(var binding: ListArticleBinding) :
     RecyclerView.ViewHolder(binding.root) {
-    fun bind(articleContent: ArticleContent) {
-        binding.article = articleContent
-        binding.executePendingBindings()
+
+    companion object {
+        @LayoutRes
+        val LAYOUT = R.layout.list_article
     }
 }

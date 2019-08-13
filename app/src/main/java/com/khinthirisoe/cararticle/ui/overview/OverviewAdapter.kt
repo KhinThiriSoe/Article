@@ -2,37 +2,37 @@ package com.khinthirisoe.cararticle.ui.overview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
+import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.RecyclerView
 import com.khinthirisoe.cararticle.databinding.ListArticleBinding
 import com.khinthirisoe.cararticle.domain.ArticleContent
 
-class OverviewAdapter(private val onClickListener: OnClickListener) :
-    ListAdapter<ArticleContent, OverviewViewHolder>(DiffCallback) {
+class OverviewAdapter(val onClickListener: OverviewFragment) :
+    RecyclerView.Adapter<OverviewViewHolder>() {
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): OverviewViewHolder {
-        return OverviewViewHolder(ListArticleBinding.inflate(LayoutInflater.from(parent.context)))
+    var articleContentLists: List<ArticleContent> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OverviewViewHolder {
+        val withDataBinding: ListArticleBinding = DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            OverviewViewHolder.LAYOUT,
+            parent,
+            false)
+        return OverviewViewHolder(withDataBinding)
     }
 
     override fun onBindViewHolder(holder: OverviewViewHolder, position: Int) {
-        val articleContent = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(articleContent)
+        holder.binding.also {
+            it.article = articleContentLists[position]
         }
-        holder.bind(articleContent)
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ArticleContent>() {
-        override fun areItemsTheSame(oldItem: ArticleContent, newItem: ArticleContent): Boolean {
-            return oldItem === newItem
-        }
-
-        override fun areContentsTheSame(oldItem: ArticleContent, newItem: ArticleContent): Boolean {
-            return oldItem.image == newItem.image
-        }
+    override fun getItemCount(): Int {
+        return articleContentLists.size
     }
 
     class OnClickListener(val clickListener: (articleContent: ArticleContent) -> Unit) {
