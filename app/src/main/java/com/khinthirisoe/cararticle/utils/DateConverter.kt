@@ -4,40 +4,6 @@ import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-fun changeDateFormat(
-    currentFormat: String,
-    requiredFormat: String,
-    dateString: String
-): String {
-
-    var result = ""
-    if (dateString.isEmpty()) {
-        return result
-    }
-
-    val oldDateFormat = SimpleDateFormat(
-        currentFormat,
-        Locale.getDefault()
-    )
-
-    val newDateFormat = SimpleDateFormat(
-        requiredFormat,
-        Locale.getDefault()
-    )
-
-    var date: Date? = null
-    try {
-        date = oldDateFormat.parse(dateString)
-    } catch (e: ParseException) {
-        e.printStackTrace()
-    }
-
-    if (date != null) {
-        result = newDateFormat.format(date)
-    }
-    return result
-}
-
 
 fun checkDate(contentDateTime: String): String {
 
@@ -75,5 +41,41 @@ fun checkDate(contentDateTime: String): String {
             )
         "$newDate, $time"
     }
-
 }
+
+private fun changeDateFormat(
+    currentFormat: String,
+    requiredFormat: String,
+    dateString: String
+): String {
+
+    var result = ""
+    if (dateString.isEmpty()) {
+        return result
+    }
+
+    val oldDateFormat = SimpleDateFormat(
+        currentFormat,
+        Locale.getDefault()
+    )
+
+    val newDateFormat = SimpleDateFormat(
+        requiredFormat,
+        Locale.getDefault()
+    )
+
+    var date: Date? = null
+    try {
+        date = oldDateFormat.parse(dateString)
+    } catch (e: ParseException) {
+        e.printStackTrace()
+    }
+
+    if (date != null) {
+        result = newDateFormat.format(date)
+    }
+    return result
+}
+
+
+

@@ -59,6 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/standard_margin"
+                app:dateTime="@{article.datetime}"
                 android:textColor="@color/primaryLightColor"
                 tools:text="29 November 2017 15:13" />
 

@@ -12,9 +12,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
+
+
 class OverviewViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _navigateToSelectedArticle = MutableLiveData<ArticleContent>()
+    private var _navigateToSelectedArticle = MutableLiveData<ArticleContent>()
     val navigateToSelectedArticle: LiveData<ArticleContent>
         get() = _navigateToSelectedArticle
 
