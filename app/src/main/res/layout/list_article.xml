@@ -8,9 +8,14 @@
         <variable
             name="article"
             type="com.khinthirisoe.cararticle.domain.ArticleContent" />
+
+        <variable
+            name="contentCallback"
+            type="com.khinthirisoe.cararticle.ui.overview.ContentClick" />
     </data>
 
     <LinearLayout
+        android:background="?attr/selectableItemBackground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -23,6 +28,7 @@
                 android:id="@+id/img_car"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/image_height"
+                android:onClick="@{() -> contentCallback.onClick(article)}"
                 android:adjustViewBounds="true"
                 android:foreground="@drawable/gradient_background"
                 android:scaleType="centerCrop"
@@ -59,8 +65,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/standard_margin"
-                app:dateTime="@{article.datetime}"
                 android:textColor="@color/primaryLightColor"
+                app:dateTime="@{article.datetime}"
                 tools:text="29 November 2017 15:13" />
 
             <TextView

@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.khinthirisoe.cararticle.databinding.ListArticleBinding
 import com.khinthirisoe.cararticle.domain.ArticleContent
 
-class OverviewAdapter(val onClickListener: OverviewFragment) :
+class OverviewAdapter(val callback: ContentClick) :
     RecyclerView.Adapter<OverviewViewHolder>() {
 
     var articleContentLists: List<ArticleContent> = emptyList()
@@ -28,14 +28,15 @@ class OverviewAdapter(val onClickListener: OverviewFragment) :
     override fun onBindViewHolder(holder: OverviewViewHolder, position: Int) {
         holder.binding.also {
             it.article = articleContentLists[position]
+            it.contentCallback = callback
         }
     }
 
     override fun getItemCount(): Int {
         return articleContentLists.size
     }
+}
 
-    class OnClickListener(val clickListener: (articleContent: ArticleContent) -> Unit) {
-        fun onClick(articleContent: ArticleContent) = clickListener(articleContent)
-    }
+class ContentClick(val block: (ArticleContent) -> Unit) {
+    fun onClick(articleContent: ArticleContent) = block(articleContent)
 }
