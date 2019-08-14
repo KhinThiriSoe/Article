@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.khinthirisoe.cararticle.R
 import com.khinthirisoe.cararticle.databinding.FragmentOverviewBinding
 import com.khinthirisoe.cararticle.domain.ArticleContent
-import com.khinthirisoe.cararticle.ui.MainActivity
 
 class OverviewFragment : Fragment() {
 
@@ -54,7 +52,7 @@ class OverviewFragment : Fragment() {
         binding.viewModel = viewModel
 
         viewModelAdapter = OverviewAdapter(ContentClick {
-           Toast.makeText(context as MainActivity,"clicked", Toast.LENGTH_SHORT).show()
+            viewModel.displayContentDetails(it)
         })
 
         binding.root.findViewById<RecyclerView>(R.id.content_list).apply {
@@ -64,7 +62,7 @@ class OverviewFragment : Fragment() {
 
         viewModel.navigateToSelectedArticle.observe(this, Observer {
             if ( null != it ) {
-                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailsFragment())
+                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailsFragment(it))
                 viewModel.displayContentDetailsComplete()
             }
         })
