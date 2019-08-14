@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.khinthirisoe.cararticle.domain.ArticleContent
 
-class DetailViewModel(articleContent: ArticleContent, app: Application) : AndroidViewModel(app) {
+class DetailsViewModel(articleContent: ArticleContent, app: Application) : AndroidViewModel(app) {
     private val _selectedContent = MutableLiveData<ArticleContent>()
 
     val selectedContent: LiveData<ArticleContent>
@@ -14,6 +14,7 @@ class DetailViewModel(articleContent: ArticleContent, app: Application) : Androi
 
     init {
         _selectedContent.value = articleContent
-
     }
+
+
 }

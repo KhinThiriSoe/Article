@@ -5,7 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.khinthirisoe.cararticle.R
+import androidx.lifecycle.ViewModelProviders
+import com.khinthirisoe.cararticle.databinding.FragmentDetailsBinding
 
 class DetailsFragment : Fragment() {
 
@@ -13,6 +14,14 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_details, container, false)
+        val application = requireNotNull(activity).application
+        val binding = FragmentDetailsBinding.inflate(inflater)
+        binding.lifecycleOwner = this
+
+        val articleContent = DetailsFragmentArgs.fromBundle(arguments!!).selectedContent
+        val viewModelFactory = DetailViewModelFactory(articleContent, application)
+        binding.viewModel = ViewModelProviders.of(
+            this, viewModelFactory).get(DetailsViewModel::class.java)
+        return binding.root
     }
 }

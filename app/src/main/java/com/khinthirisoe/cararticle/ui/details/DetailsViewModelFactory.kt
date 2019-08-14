@@ -11,8 +11,8 @@ class DetailViewModelFactory(
 ) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(articleContent, application) as T
+        if (modelClass.isAssignableFrom(DetailsViewModel::class.java)) {
+            return DetailsViewModel(articleContent, application) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }
