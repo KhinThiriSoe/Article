@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import com.khinthirisoe.cararticle.domain.ArticleContent
 
 class DetailsViewModel(articleContent: ArticleContent, app: Application) : AndroidViewModel(app) {
@@ -16,5 +17,12 @@ class DetailsViewModel(articleContent: ArticleContent, app: Application) : Andro
         _selectedContent.value = articleContent
     }
 
+    val contentTitle = Transformations.map(selectedContent) { articleContent ->
+        articleContent.title
+    }
+
+    val contentImageUrl = Transformations.map(selectedContent) { articleContent ->
+        articleContent.image
+    }
 
 }

@@ -21,9 +21,10 @@
 
             <ImageView
                 android:id="@+id/img_car"
-                android:layout_width="0dp"
+                android:layout_width="373dp"
                 android:layout_height="266dp"
                 android:scaleType="centerCrop"
+                app:imageUrl="@{viewModel.contentImageUrl}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -38,6 +39,7 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:textColor="#de000000"
+                android:text="@{viewModel.contentTitle}"
                 android:textSize="@dimen/title_size"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
