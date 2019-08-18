@@ -7,6 +7,7 @@ import com.khinthirisoe.cararticle.database.asDomainModel
 import com.khinthirisoe.cararticle.domain.ArticleContent
 import com.khinthirisoe.cararticle.network.Network
 import com.khinthirisoe.cararticle.network.asDatabaseModel
+import com.khinthirisoe.cararticle.ui.connection.InternetUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -18,8 +19,10 @@ class ArticleRepository(private val database: ArticlesDatabase) {
 
     suspend fun refreshArticles() {
         withContext(Dispatchers.IO) {
-            val article = Network.articleService.getArticleList().await()
-            database.articleDao.insertAll(*article.asDatabaseModel())
+            if (InternetUtil.isInternetOn()){
+                val article = Network.articleService.getArticleList().await()
+                database.articleDao.insertAll(*article.asDatabaseModel())
+            }
         }
     }
 
