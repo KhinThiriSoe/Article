@@ -16,12 +16,11 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/img_car"
-                android:layout_width="373dp"
+                android:layout_width="0dp"
                 android:layout_height="266dp"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{viewModel.contentImageUrl}"
